@@ -18,6 +18,35 @@ document.addEventListener('turbolinks:load', () => {
   const A_MONTH_AGO = new Date(TODAY.getFullYear(), TODAY.getMonth() - 1, TODAY.getDate() + 1)
   const THREE_MONTHS_AGO = new Date(TODAY.getFullYear(), TODAY.getMonth() - 3, TODAY.getDate() + 1)
 
+  // カレンダーの日本語化
+  flatpickr.localize(flatpickr.l10ns.ja)
+
+  // 開始日,終了日を変更したとき、グラフが更新されるように設定
+  const drawGraphForPeriod = () => {
+    let from = convertDate(document.getElementById('start-calendar').value)
+    let to = convertDate(document.getElementById('end-calendar').value)
+
+    if (from > to) {
+        alert('終了日は開始日以降の日付に設定して下さい')
+    } else {
+        drawGraph(from, to)
+    }
+}
+
+  const periodCalendarOption = {
+      // スマートフォンでもカレンダーに「flatpickr」を使用
+      disableMobile: true,
+      // 選択できる期間を設定
+      minDate: START_DATE,
+      maxDate: END_DATE,
+      // 日付選択後のイベント
+      // onChange: （後で記述）
+  }
+
+  // カレンダー
+  const startCalendarFlatpickr = flatpickr('#start-calendar', periodCalendarOption)
+  const endCalendarFlatpickr = flatpickr('#end-calendar', periodCalendarOption)
+
   // グラフを描く場所を取得
   const chartWeightContext = document.getElementById("chart-weight").getContext('2d')
   let chartWeight
@@ -87,6 +116,9 @@ document.addEventListener('turbolinks:load', () => {
       from = maxDate(from, START_DATE)
       let to = minDate(TODAY, END_DATE)
       drawGraph(from, to)
+          // フォームの開始日・終了日を変更する
+          startCalendarFlatpickr.setDate(from)
+          endCalendarFlatpickr.setDate(to)
   }
 
   // 過去◯週間のグラフを描くボタン
