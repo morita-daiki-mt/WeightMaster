@@ -40,8 +40,8 @@ document.addEventListener('turbolinks:load', () => {
       minDate: START_DATE,
       maxDate: END_DATE,
       // 日付選択後のイベント
-      // onChange: （後で記述）
-  }
+      onChange: drawGraphForPeriod
+}
 
   // カレンダー
   const startCalendarFlatpickr = flatpickr('#start-calendar', periodCalendarOption)
