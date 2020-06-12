@@ -4,21 +4,15 @@ require:
   - rubocop-rails
 
 AllCops:
-  TargetRubyVersion: 2.6
+  # TargetRubyVersion: 2.6.6
   Exclude:
-    - app/channels/**/*
-    - node_modules/**/*
-    - bin/*
-    - test/**/*
-    - spec/**/*
-    - lib/*
-    - db/migrate/*
-    - db/schema.rb
-    - lib/tasks/*
-    - public/*
-    - tmp/*
-    - vendor/**/*
-    - config/spring.rb
+    - 'config.ru'
+    - 'bin/**'
+    - 'lib/**'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'spec/**/*'
 
 # 参考: https://qiita.com/hi-nakamura/items/fb841be12566e7f579f0
 
