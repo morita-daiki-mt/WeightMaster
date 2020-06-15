@@ -8,7 +8,7 @@ class Graph < ApplicationRecord
   def self.chart_data(user)
     graphs = user.graphs.order(date: :asc)
     # 記録がない場合、エラーが出るのを阻止
-    return [{ date: Date.today, weight: nil}] if graphs.empty?
+    return [{ date: Date.today, weight: nil }] if graphs.empty?
 
     period = graphs[0].date..graphs[-1].date 
     # 記録の初日から最終日までの配列データを作成
@@ -19,7 +19,7 @@ class Graph < ApplicationRecord
         index += 1
       end
       # データが存在しない日付の体重はnilとする
-      { date: date, weight: weight}
+      { date: date, weight: weight }
     end
   end
 end
